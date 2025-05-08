@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Registration with Menu - Dark Mode</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>
+        // Optional script to prevent flash of light mode on load
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+</head>
+<body class="bg-gray-800 dark:bg-gray-900 h-screen flex items-center justify-center pattern-dots bg-gradient-to-br from-gray-700 to-gray-800">
+
+    <div id="authContainer" class="bg-gray-700 dark:bg-gray-800 p-8 rounded shadow-md w-96">
+        <h2 id="authTitle" class="text-2xl font-semibold text-white dark:text-gray-100 mb-4">Welcome</h2>
+
+        <div class="mb-4">
+            <label for="username" class="block text-gray-300 dark:text-gray-400 text-sm font-bold mb-2">Username:</label>
+            <input type="text" id="username" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:text-white dark:border-gray-500" placeholder="Enter your username">
+        </div>
+
+        <div class="mb-6">
+            <label for="password" class="block text-gray-300 dark:text-gray-400 text-sm font-bold mb-2">Password:</label>
+            <input type="password" id="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:text-white dark:border-gray-500" placeholder="Enter your password">
+        </div>
+
+        <div id="confirmPasswordDiv" class="mb-6 hidden">
+            <label for="confirmPassword" class="block text-gray-300 dark:text-gray-400 text-sm font-bold mb-2">Confirm Password:</label>
+            <input type="password" id="confirmPassword" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:text-white dark:border-gray-500" placeholder="Confirm your password">
+        </div>
+
+        <button id="authButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline dark:bg-blue-700 dark:hover:bg-blue-900 mx-auto block">
+            Log In
+        </button>
+
+
+        <p id="authToggle" class="text-center text-blue-500 dark:text-blue-400 text-sm mt-2 cursor-pointer">Not registered? Create an account</p>
+    </div>
+
+    <div id="sidebarMenu" class="hidden">
+        <ul>
+            <li>
+                <a href="#" id="helloWorldButton" class="hover:bg-gray-700 dark:hover:bg-gray-600 transition duration-200 ease-in-out">
+                    <span class="icon"><i class="fas fa-globe"></i></span>
+                    <span class="label">Hello World</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#" id="anotherWorldButton" class="flex items-center hover:bg-gray-700 dark:hover:bg-gray-600 transition duration-200 ease-in-out">
+                    <span class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 stroke-blue-500">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m6.115 5.19.319 1.913A6 6 0 0 0 8.11 10.36L9.75 12l-.387.775c-.217.433-.132.956.21 1.298l1.348 1.348c.21.21.329.497.329.795v1.089c0 .426.24.815.622 1.006l.153.076c.433.217.956.132 1.298-.21l.723-.723a8.7 8.7 0 0 0 2.288-4.042 1.087 1.087 0 0 0-.358-1.099l-1.33-1.108c-.251-.21-.582-.299-.905-.245l-1.17.195a1.125 1.125 0 0 1-.98-.314l-.295-.295a1.125 1.125 0 0 1 0-1.591l.13-.132a1.125 1.125 0 0 1 1.3-.21l.603.302a.809.809 0 0 0 1.086-1.086L14.25 7.5l1.256-.837a4.5 4.5 0 0 0 1.528-1.732l.146-.292M6.115 5.19A9 9 0 1 0 17.18 4.64M6.115 5.19A8.965 8.965 0 0 1 12 3c1.929 0 3.716.607 5.18 1.64" />
+                        </svg>
+                    </span>
+                    <span class="label">Another World</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#" id="goodbyeWorldButton" class="hover:bg-gray-700 dark:hover:bg-gray-600 transition duration-200 ease-in-out">
+                    <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+                    <span class="label">Goodbye World</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div id="contentContainer" class="hidden p-8 rounded shadow-md w-96 text-center">
+        <div id="helloWorld" class="">
+            <h1 id="greeting" class="text-4xl font-semibold text-white dark:text-gray-100 mb-6">Hello, World!</h1>
+            <p class="text-gray-300 dark:text-gray-400 mb-4">Welcome to the Hello World page. Enjoy!</p>
+        </div>
+
+        <div id="anotherWorld" class="hidden">
+            <h1 class="text-4xl font-semibold text-white dark:text-gray-100 mb-6">Another World!</h1>
+            <p class="text-gray-300 dark:text-gray-400 mb-4">Exploring another world!</p>
+        </div>
+
+        <div id="goodbyeWorld" class="hidden">
+            <h1 class="text-4xl font-semibold text-white dark:text-gray-100 mb-6">Goodbye, World!</h1>
+            <p class="text-gray-300 dark:text-gray-400 mb-4">Thanks for visiting!</p>
+            <button id="logoutButton" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline dark:bg-red-700 dark:hover:bg-red-900">
+                Log Out
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const authContainer = document.getElementById('authContainer');
+            const authTitle = document.getElementById('authTitle');
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const confirmPasswordDiv = document.getElementById('confirmPasswordDiv');
+            const authButton = document.getElementById('authButton');
+            const authToggle = document.getElementById('authToggle');
+            const sidebarMenu = document.getElementById('sidebarMenu');
+            const helloWorldButton = document.getElementById('helloWorldButton');
+            const anotherWorldButton = document.getElementById('anotherWorldButton');
+            const goodbyeWorldButton = document.getElementById('goodbyeWorldButton');
+            const helloWorld = document.getElementById('helloWorld');
+            const anotherWorld = document.getElementById('anotherWorld');
+            const goodbyeWorld = document.getElementById('goodbyeWorld');
+            const logoutButton = document.getElementById('logoutButton');
+            const contentContainer = document.getElementById('contentContainer');
+
+
+            let isLogin = true; // Track whether it's login or registration
+            let registeredUsers = []; // In real app, this would be on a server
+
+            //Event listeners
+            authButton.addEventListener('click', authenticate);
+            authToggle.addEventListener('click', toggleAuthMode);
+            //Event listener for the "Enter" key
+            passwordInput.addEventListener('keydown', function(event) {
+                if (event.key === "Enter") {
+                    authenticate();
+                }
+            });
+            logoutButton.addEventListener('click', logout);
+            helloWorldButton.addEventListener('click', showHelloWorldPage);
+            anotherWorldButton.addEventListener('click', showAnotherWorldPage);
+            goodbyeWorldButton.addEventListener('click', showGoodbyeWorldPage);
+
+            function toggleAuthMode() {
+                //Clear input fields before switching:
+                usernameInput.value = '';
+                passwordInput.value = '';
+                confirmPasswordInput.value = '';
+
+                isLogin = !isLogin;
+                authTitle.textContent = isLogin ? 'Login' : 'Register';
+                authButton.textContent = isLogin ? 'Log In' : 'Register';
+                authToggle.textContent = isLogin ? 'Not registered? Create an account' : 'Already have an account? Log in';
+                confirmPasswordDiv.classList.toggle('hidden', isLogin); //Show confirm password on register
+            }
+
+            function authenticate() {
+                const username = usernameInput.value;
+                const password = passwordInput.value;
+
+                //**VERY IMPORTANT: In a REAL application, you MUST validate the username and password on the SERVER-SIDE!**
+                //This is just a SIMULATION for demonstration purposes.  NEVER trust client-side validation for security!
+
+                if (isLogin) {
+                    // Simulate login
+                    const user = registeredUsers.find(u => u.username === username && u.password === password);
+                    if (user) {
+                        showMenu();
+                        showHelloWorldPage(); // Default page after login
+                        //Clear input
+                        usernameInput.value = '';
+                        passwordInput.value = '';
+                    } else {
+                        alert('Invalid username or password');
+                    }
+
+                } else {
+                    // Simulate registration
+                    const confirmPassword = confirmPasswordInput.value;
+                    if (password !== confirmPassword) {
+                        alert("Passwords do not match");
+                        return;
+                    }
+
+                    if (username && password) {
+                        //Check if username already exists
+                        if(registeredUsers.find(u => u.username === username)){
+                            alert("Username already exists");
+                            return;
+                        }
+
+                        registeredUsers.push({ username, password }); //Store user
+                        alert('Account created successfully. Please log in.');
+                        toggleAuthMode(); //Switch back to login
+                        //Clear input fields on successful registration:
+                        usernameInput.value = '';
+                        passwordInput.value = '';
+                        confirmPasswordInput.value = '';
+
+                    } else {
+                        alert('Please enter a username and password.');
+                    }
+                }
+            }
+
+            function showMenu() {
+                authContainer.classList.add('hidden');
+                sidebarMenu.classList.remove('hidden');
+                contentContainer.classList.remove('hidden');
+
+            }
+
+            function showHelloWorldPage() {
+                anotherWorld.classList.add('hidden');
+                goodbyeWorld.classList.add('hidden');
+                helloWorld.classList.remove('hidden');
+            }
+
+            function showAnotherWorldPage() {
+                helloWorld.classList.add('hidden');
+                goodbyeWorld.classList.add('hidden');
+                anotherWorld.classList.remove('hidden');
+            }
+
+            function showGoodbyeWorldPage() {
+                helloWorld.classList.add('hidden');
+                anotherWorld.classList.add('hidden');
+                goodbyeWorld.classList.remove('hidden');
+            }
+
+            function logout() {
+                sidebarMenu.classList.add('hidden');
+                contentContainer.classList.add('hidden');
+                authContainer.classList.remove('hidden');
+            }
+        });
+    </script>
+    <style>
+        /* Custom styles for background patterns (optional) */
+        .pattern-dots {
+            background-image: radial-gradient(rgba(200, 200, 200, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Sidebar Menu Styles */
+        #sidebarMenu {
+            position: fixed;
+            top: 0;
+            left: 0; /* Changed from right: 0 */
+            height: 100vh;
+            width: 60px; /* Collapsed width */
+            background-color: rgba(55, 65, 81, 0.8); /* Slightly transparent dark background */
+            backdrop-filter: blur(10px); /* Add a blur effect */
+            padding-top: 2rem;
+            transition: width 0.3s ease; /* Smooth transition for width */
+            z-index: 10; /* Ensure it's above other content */
+        }
+
+        #sidebarMenu:hover {
+            width: 200px; /* Expanded width on hover */
+        }
+
+        #sidebarMenu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #sidebarMenu li {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #sidebarMenu li:last-child {
+            border-bottom: none;
+        }
+
+        #sidebarMenu a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            /* Add hover effect */
+        }
+
+        #sidebarMenu a:hover {
+            background-color: rgba(0, 0, 0, 0.2); /* Slightly darker background on hover */
+        }
+
+        #sidebarMenu a .icon {
+            margin-right: 0.75rem;
+            width: 20px;
+        }
+
+        #sidebarMenu .label {
+            white-space: nowrap; /* Prevent text from wrapping */
+            overflow: hidden;
+            text-overflow: ellipsis; /* Add ellipsis if text is too long */
+        }
+
+        #contentContainer {
+            margin-left: 60px; /*Adjust to the collapsed sidebar width*/
+        }
+    </style>
+</body>
+</html>
